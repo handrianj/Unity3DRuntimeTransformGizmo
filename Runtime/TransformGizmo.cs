@@ -133,7 +133,7 @@ namespace RuntimeGizmos
 		public TransformEvent transformAddedEvent = new TransformEvent();
 		public TransformEvent transformRemovedEvent = new TransformEvent();
 		public TransformEvent transformClearAndAddedEvent = new TransformEvent();
-		public TransformEvent transformClearedEvent = new UnityEvent();
+		public UnityEvent transformClearedEvent = new UnityEvent();
 
 		void Awake()
 		{
