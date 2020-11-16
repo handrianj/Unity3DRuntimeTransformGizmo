@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
+
 using System.Collections.Generic;
 using System.Collections;
 using CommandUndoRedo;
@@ -127,6 +129,11 @@ namespace RuntimeGizmos
 
 		static Material lineMaterial;
 		static Material outlineMaterial;
+
+		public TransformEvent transformAddedEvent = new TransformEvent();
+		public TransformEvent transformRemovedEvent = new TransformEvent();
+		public TransformEvent transformClearAndAddedEvent = new TransformEvent();
+		public TransformEvent transformClearedEvent = new UnityEvent();
 
 		void Awake()
 		{
@@ -644,19 +651,23 @@ namespace RuntimeGizmos
 					if(isAdding)
 					{
 						AddTarget(target);
+						transformAddedEvent.Invoke(target);
 					}
 					else if(isRemoving)
 					{
 						RemoveTarget(target);
+						transformRemovedEvent.Invoke(target);
 					}
 					else if(!isAdding && !isRemoving)
 					{
 						ClearAndAddTarget(target);
+						transformClearAndAddedEvent.Invoke(target);
 					}
 				}else{
 					if(!isAdding && !isRemoving)
 					{
 						ClearTargets();
+						transformClearedEvent.Invoke()
 					}
 				}
 			}
@@ -1420,6 +1431,10 @@ namespace RuntimeGizmos
 				lineMaterial = new Material(Shader.Find("Custom/Lines"));
 				outlineMaterial = new Material(Shader.Find("Custom/Outline"));
 			}
+		}
+
+		public class TransformEvent : UnityEvent<Transform>
+		{
 		}
 	}
 }
