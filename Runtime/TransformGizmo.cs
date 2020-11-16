@@ -667,7 +667,7 @@ namespace RuntimeGizmos
 					if(!isAdding && !isRemoving)
 					{
 						ClearTargets();
-						transformClearedEvent.Invoke()
+						transformClearedEvent.Invoke();
 					}
 				}
 			}
