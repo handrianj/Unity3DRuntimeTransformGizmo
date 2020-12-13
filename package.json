@@ -1,7 +1,7 @@
 {
   "name": "com.hiddenmonk.u3drtg",
   "displayName": "Unity 3D Runtime Transform Gizmo",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "unity": "2019.4",
   "description": "A runtime transform gizmo similar to unitys editor so you can translate (move, rotate, scale) objects at runtime. Customized for Neogoma unity editor",
   "repository": {
