@@ -133,7 +133,7 @@ namespace RuntimeGizmos
         public TransformEvent transformAddedEvent = new TransformEvent();
         public TransformEvent transformRemovedEvent = new TransformEvent();
         public TransformEvent transformClearAndAddedEvent = new TransformEvent();
-        public UnityEvent<TransformType> transformTypeChanged = new UnityEvent<TransformType>();
+        public TransformTypeChangedEvent transformTypeChanged = new TransformTypeChangedEvent;
 
 
         public UnityEvent transformClearedEvent = new UnityEvent();
@@ -1470,6 +1470,9 @@ namespace RuntimeGizmos
         {
         }
 
+        public class TransformTypeChangedEvent: UnityEvent<TransformType>
+        {
+        }
 
     }
 }
