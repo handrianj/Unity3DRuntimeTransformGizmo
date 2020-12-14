@@ -1,15 +1,15 @@
 {
-  "name": "com.hiddenmonk.u3drtg",
+  "name": "org.handrianj.runtimegizmo",
   "displayName": "Unity 3D Runtime Transform Gizmo",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "unity": "2019.4",
-  "description": "A runtime transform gizmo similar to unitys editor so you can translate (move, rotate, scale) objects at runtime. Customized for Neogoma unity editor",
+  "description": "A runtime transform gizmo similar to unitys editor so you can translate (move, rotate, scale) objects at runtime with unity events to notify the changes. Forked from com.hiddenmonk.u3drtg."
   "repository": {
     "type": "git",
     "url": "https://github.com/handrianj/Unity3DRuntimeTransformGizmo.git"
   },
-  "author": "HiddenMonk",
+  "author": "Heri Andrianjafy",
   "hideInEditor": false,
-  "homepage": "https://github.com/HiddenMonk/Unity3DRuntimeTransformGizmo.git",
+  "homepage": "https://github.com/handrianj/Unity3DRuntimeTransformGizmo.git",
   "license": "MIT"
 }
