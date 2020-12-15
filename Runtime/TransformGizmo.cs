@@ -669,7 +669,7 @@ namespace RuntimeGizmos
 
         void GetTarget()
         {
-            if (nearAxis == Axis.None && Input.GetMouseButtonDown(0))
+            if (nearAxis == Axis.None && Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
             {
                 bool isAdding = Input.GetKey(AddSelection);
                 bool isRemoving = Input.GetKey(RemoveSelection);
