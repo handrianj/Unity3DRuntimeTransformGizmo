@@ -1,7 +1,7 @@
 {
   "name": "org.handrianj.u3drtg",
   "displayName": "Unity 3D Runtime Transform Gizmo",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "unity": "2019.",
   "description": "A runtime transform gizmo similar to unitys editor so you can translate (move, rotate, scale) objects at runtime with unity events to notify the changes. Forked from com.hiddenmonk.u3drtg.",
   "repository": {
