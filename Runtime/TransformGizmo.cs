@@ -138,6 +138,8 @@ namespace RuntimeGizmos
 
 
         public UnityEvent transformClearedEvent = new UnityEvent();
+        public UnityEvent transformUpdateEvent = new UnityEvent();
+
 
         void Awake()
         {
@@ -600,7 +602,7 @@ namespace RuntimeGizmos
                 }
 
                 previousMousePosition = mousePosition;
-
+                transformUpdateEvent.Invoke();
                 yield return null;
             }
 
