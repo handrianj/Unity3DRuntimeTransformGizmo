@@ -84,6 +84,44 @@ namespace RuntimeGizmos
 
         public bool manuallyHandleGizmo;
 
+        /// <summary>
+        /// allow movement along x axis
+        /// </summary>
+        public bool allowXMove = true;
+        /// <summary>
+        /// allow movement along y axis
+        /// </summary>
+        public bool allowYMove = true;
+        /// <summary>
+        /// allow movement along z axis
+        /// </summary>
+        public bool allowZMove = true;
+        /// <summary>
+        /// allow scale along x axis
+        /// </summary>
+        public bool allowXScale = true;
+        /// <summary>
+        /// allow scale along y axis
+        /// </summary>
+        public bool allowYScale = true;
+        /// <summary>
+        /// allow scale along z axis
+        /// </summary>
+        public bool allowZScale = true;
+        /// <summary>
+        /// allow rotate along x axis
+        /// </summary>
+        public bool allowXRotate = true;
+        /// <summary>
+        /// allow rotate along y axis
+        /// </summary>
+        public bool allowYRotate = true;
+        /// <summary>
+        /// allow rotate along z axis
+        /// </summary>
+        public bool allowZRotate = true;
+
+
         public LayerMask selectionMask = Physics.DefaultRaycastLayers;
 
         public Action onCheckForSelectedAxis;
@@ -217,27 +255,72 @@ namespace RuntimeGizmos
             //Note: The order of drawing the axis decides what gets drawn over what.
 
             TransformType moveOrScaleType = (transformType == TransformType.Scale || (isTransforming && translatingType == TransformType.Scale)) ? TransformType.Scale : TransformType.Move;
-            DrawQuads(handleLines.z, GetColor(moveOrScaleType, this.zColor, zColor, hasTranslatingAxisPlane));
-            DrawQuads(handleLines.x, GetColor(moveOrScaleType, this.xColor, xColor, hasTranslatingAxisPlane));
-            DrawQuads(handleLines.y, GetColor(moveOrScaleType, this.yColor, yColor, hasTranslatingAxisPlane));
 
-            DrawTriangles(handleTriangles.x, GetColor(TransformType.Move, this.xColor, xColor, hasTranslatingAxisPlane));
-            DrawTriangles(handleTriangles.y, GetColor(TransformType.Move, this.yColor, yColor, hasTranslatingAxisPlane));
-            DrawTriangles(handleTriangles.z, GetColor(TransformType.Move, this.zColor, zColor, hasTranslatingAxisPlane));
 
-            DrawQuads(handlePlanes.z, GetColor(TransformType.Move, this.zColor, zColor, planesOpacity, !hasTranslatingAxisPlane));
-            DrawQuads(handlePlanes.x, GetColor(TransformType.Move, this.xColor, xColor, planesOpacity, !hasTranslatingAxisPlane));
-            DrawQuads(handlePlanes.y, GetColor(TransformType.Move, this.yColor, yColor, planesOpacity, !hasTranslatingAxisPlane));
+            if (transformType == TransformType.Move)
+            {
+                if (allowXMove)
+                    DrawQuads(handleLines.x, GetColor(moveOrScaleType, this.xColor, xColor, hasTranslatingAxisPlane));
+                if (allowYMove)
+                    DrawQuads(handleLines.y, GetColor(moveOrScaleType, this.yColor, yColor, hasTranslatingAxisPlane));
+                if (allowZMove)
+                    DrawQuads(handleLines.z, GetColor(moveOrScaleType, this.zColor, zColor, hasTranslatingAxisPlane));
 
-            DrawQuads(handleSquares.x, GetColor(TransformType.Scale, this.xColor, xColor));
-            DrawQuads(handleSquares.y, GetColor(TransformType.Scale, this.yColor, yColor));
-            DrawQuads(handleSquares.z, GetColor(TransformType.Scale, this.zColor, zColor));
+            }
+            else if (transformType == TransformType.Scale)
+            {
+                if (allowXScale)
+                    DrawQuads(handleLines.x, GetColor(moveOrScaleType, this.xColor, xColor, hasTranslatingAxisPlane));
+                if (allowYScale)
+                    DrawQuads(handleLines.y, GetColor(moveOrScaleType, this.yColor, yColor, hasTranslatingAxisPlane));
+                if (allowZScale)
+                    DrawQuads(handleLines.z, GetColor(moveOrScaleType, this.zColor, zColor, hasTranslatingAxisPlane));
+            }
+
+            if (allowXMove)
+                DrawTriangles(handleTriangles.x, GetColor(TransformType.Move, this.xColor, xColor, hasTranslatingAxisPlane));
+            if (allowYMove)
+                DrawTriangles(handleTriangles.y, GetColor(TransformType.Move, this.yColor, yColor, hasTranslatingAxisPlane));
+            if (allowZMove)
+                DrawTriangles(handleTriangles.z, GetColor(TransformType.Move, this.zColor, zColor, hasTranslatingAxisPlane));
+
+            if (allowXMove && allowYMove && allowZMove)
+            {
+                DrawQuads(handlePlanes.x, GetColor(TransformType.Move, this.xColor, xColor, planesOpacity, !hasTranslatingAxisPlane));
+                DrawQuads(handlePlanes.y, GetColor(TransformType.Move, this.yColor, yColor, planesOpacity, !hasTranslatingAxisPlane));
+                DrawQuads(handlePlanes.z, GetColor(TransformType.Move, this.zColor, zColor, planesOpacity, !hasTranslatingAxisPlane));
+            }
+            else if (allowYMove && allowZMove)
+            {
+                DrawQuads(handlePlanes.x, GetColor(TransformType.Move, this.xColor, xColor, planesOpacity, !hasTranslatingAxisPlane));
+
+            }
+            else if (allowXMove && allowZMove)
+            {
+                DrawQuads(handlePlanes.y, GetColor(TransformType.Move, this.yColor, yColor, planesOpacity, !hasTranslatingAxisPlane));
+
+            }
+            else if (allowXMove && allowYMove)
+            {
+                DrawQuads(handlePlanes.z, GetColor(TransformType.Move, this.zColor, zColor, planesOpacity, !hasTranslatingAxisPlane));
+
+            }
+
+            if (allowXScale)
+                DrawQuads(handleSquares.x, GetColor(TransformType.Scale, this.xColor, xColor));
+            if (allowYScale)
+                DrawQuads(handleSquares.y, GetColor(TransformType.Scale, this.yColor, yColor));
+            if (allowZScale)
+                DrawQuads(handleSquares.z, GetColor(TransformType.Scale, this.zColor, zColor));
             DrawQuads(handleSquares.all, GetColor(TransformType.Scale, this.allColor, allColor));
 
             DrawQuads(circlesLines.all, GetColor(TransformType.Rotate, this.allColor, allColor));
-            DrawQuads(circlesLines.x, GetColor(TransformType.Rotate, this.xColor, xColor));
-            DrawQuads(circlesLines.y, GetColor(TransformType.Rotate, this.yColor, yColor));
-            DrawQuads(circlesLines.z, GetColor(TransformType.Rotate, this.zColor, zColor));
+            if (allowXRotate)
+                DrawQuads(circlesLines.x, GetColor(TransformType.Rotate, this.xColor, xColor));
+            if (allowYRotate)
+                DrawQuads(circlesLines.y, GetColor(TransformType.Rotate, this.yColor, yColor));
+            if (allowZRotate)
+                DrawQuads(circlesLines.z, GetColor(TransformType.Rotate, this.zColor, zColor));
         }
 
         Color GetColor(TransformType type, Color normalColor, Color nearColor, bool forceUseNormal = false)
@@ -1473,7 +1556,7 @@ namespace RuntimeGizmos
         {
         }
 
-        public class TransformTypeChangedEvent: UnityEvent<TransformType>
+        public class TransformTypeChangedEvent : UnityEvent<TransformType>
         {
         }
 
